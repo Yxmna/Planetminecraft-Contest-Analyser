@@ -1,0 +1,56 @@
+body {
+  background: #000000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body > div  {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+input {
+  font-size: 16px;
+  padding: 0.25em 0.5em;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  width: 100%;
+}
+
+input:focus {
+  border: none;
+}
+
+ul, body > div  {
+  max-width: 765px;
+  padding: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #212121;
+}
+
+ul li {
+  height: 146px;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+ul li img {
+  width: 256px;
+  margin-right: 20px;
+}
+
+ul li h1 {
+  color: white;
+  font-size: 22px;
+}
+
+ul li h2 {
+  color: white;
+  font-size: 20px;
+}
