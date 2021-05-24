@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Roboto-Bold;
+  src: url(roboto-v27-latin-700.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: Roboto-Regular;
+  src: url(roboto-v27-latin-regular.woff2) format("woff2");
+}
+
 body {
   background: #000000;
   color: white;
@@ -6,9 +16,11 @@ body {
 * {
   margin: 0;
   padding: 0;
+  font-family: Roboto-Regular;
+  font-weight: lighter;
 }
 
-body > div  {
+body>div {
   padding-top: 100px;
   padding-bottom: 100px;
 }
@@ -27,7 +39,7 @@ input:focus {
   border: none;
 }
 
-ul, body > div  {
+ul, body>div {
   max-width: 765px;
   padding: 50px;
   margin-left: auto;
@@ -36,22 +48,122 @@ ul, body > div  {
 }
 
 ul li {
-  height: 146px;
+  /* height: 146px; */
   display: flex;
-  margin-bottom: 20px;
+  margin: 5px 0 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px #222;
+  padding: 0;
+  background: #303030;
+  min-height: 156px;
 }
 
-ul li img {
+ul li>img {
   width: 256px;
-  margin-right: 20px;
+  border-radius: 5px;
+  margin: 5px;
+  margin-right: 15px;
+  height: min-content;
 }
 
 ul li h1 {
   color: white;
-  font-size: 22px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+ul li h1:not(:first-child) {
+  font-size: 30px;
+  font-family: roboto-bold;
+}
+
+.top_25 {
+  color: slateblue;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, .75));
+}
+
+.top_50 {
+  color: tomato;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, .25));
+}
+
+ul li h1:not(:first-child)::before {
+  content: "#";
 }
 
 ul li h2 {
   color: white;
-  font-size: 20px;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+ul li h3 {
+  color: white;
+  font-size: 14px;
+}
+
+.author_div {
+  display: flex;
+  width: max-content;
+  align-items: center;
+}
+
+.author_div img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.content {
+  margin: 10px 0;
+  position: relative;
+  padding-right: 20px;
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 470px; */
+}
+
+.div_one {}
+
+.div_two {
+  bottom: 0;
+  position: absolute;
+}
+
+.diamonds {
+  font-size: 18px;
+}
+
+.diamonds::after {
+  content: "💎";
+  margin-left: 3px;
+}
+
+.views::after {
+  content: "👀";
+  margin-left: 3px;
+  top: -1px;
+  position: relative;
+}
+
+.favorites::after {
+  content: "💖";
+  margin-left: 3px;
+}
+
+.downloads::after {
+  content: "⏬";
+  margin-left: 3px;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.stats>* {
+  margin-right: 10px;
 }
