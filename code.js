@@ -16,20 +16,28 @@ function EnterToTheMine() {
   pages = [];
   chest = {};
   t = 0;
+  document.getElementById("contest_img").src = "";
+  document.getElementById("hight").innerHTML = "?? 💎";
+  document.getElementById("small").innerHTML = "?? 💎";
+  document.getElementById("log").innerHTML = "";
   if (document.getElementById("contest_name").value.startsWith("https://www.planetminecraft.com/")) {
     url = document.getElementById("contest_name").value;
   } else {
     url = "https://www.planetminecraft.com/contests/" + document.getElementById("contest_name").value.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, " ").split(" ").join("-").toLowerCase();
   }
-  console.log("> Analyse mine size..");
+  Logger("> Analyse mine size..")
   fetch(url)
     .then(function(response) {
       return response.text();
     })
     .then(function(result) {
       // MineDiamond(result);
-      var page_count = Math.ceil((result.split("Entries (")[1].split(")\"")[0]) / 25);
-      console.log("- Underground gallery found: " + page_count);
+      try {
+        var page_count = Math.ceil((result.split("Entries (")[1].split(")\"")[0]) / 25)
+      } catch (e) {
+        Logger("✕ Error, Invalid URL")
+      }
+      Logger("- Underground gallery found: " + page_count);
       SearchDiamond(page_count);
     })
 }
@@ -37,7 +45,7 @@ function EnterToTheMine() {
 
 function SearchDiamond(page_count) {
   for (var i = 0; i < page_count; i++) {
-    console.log("> Mine diamonds, gallery " + (i + 1) + "..");
+    Logger("> Mine diamonds, gallery " + (i + 1) + "..");
     fetch(url + "/entries/?p=" + (i + 1))
       .then(function(response) {
         return response.text();
@@ -45,16 +53,20 @@ function SearchDiamond(page_count) {
       .then(function(result) {
         pages.push(result.split('id="right"')[0].split('id="center"')[1].split('resource_list')[1]);
         if (pages.length == page_count) {
-          console.log("- Diamond Mined !");
+          document.getElementById("contest_img").src = result.split('" title="Minecraft Contest"')[0].split("<img src=\"")[1];
+          Logger("- Diamonds mined !");
           StoreDiamond(pages);
         }
       })
   }
 }
 
+// function resize() {
+//   document.getElementById("log").style.height = "calc(" + document.getElementById("contest_img").offsetHeight + "px - 35px)";
+// }
 
 function StoreDiamond(pages) {
-  console.log("> Store diamonds..");
+  Logger("> Store diamonds..");
   pages.forEach((page, i) => {
     page.split("</li>").forEach((resource, j) => {
       if (resource.search("Give diamond") > 0) {
@@ -113,11 +125,15 @@ function StoreDiamond(pages) {
 
 
 function DisplayDiamond() {
-  console.log("> Display diamonds..");
+  Logger("> Display diamonds..");
   var chest_sorted = Object.values(chest).sort((a, b) => {
+    return b.favorites - a.favorites;
+  }).sort((a, b) => {
     return b.diamonds - a.diamonds;
   });
   chest = Object.assign({}, chest_sorted);
+  document.getElementById("hight").innerHTML = chest[0].diamonds + " - " + chest[24].diamonds + " 💎";
+  document.getElementById("small").innerHTML = chest[24].diamonds + " - " + chest[49].diamonds + " 💎";
   document.getElementById("ul").innerHTML = "";
   Object.values(chest).forEach((item, i) => {
     var li = document.createElement("li");
@@ -137,11 +153,11 @@ function DisplayDiamond() {
     var author_div = document.createElement("div");
     img.src = item.img_url;
     h1.innerHTML = item.title;
-    diamonds.innerHTML = item.diamonds;
-    favorites.innerHTML = item.favorites;
-    downloads.innerHTML = item.downloads;
-    views.innerHTML = item.views;
-    rank.innerHTML = i + 1;
+    diamonds.innerHTML = item.diamonds + " 💎";
+    favorites.innerHTML = item.favorites + " 💖";
+    downloads.innerHTML = item.downloads + " ⏬";
+    views.innerHTML = item.views + " 👀";
+    rank.innerHTML = "#" + (i + 1);
     author_img.src = item.author_img;
     author.innerHTML = item.author;
     if ((i + 1) <= 25) {
@@ -173,10 +189,18 @@ function DisplayDiamond() {
     li.appendChild(img);
     li.appendChild(div);
     document.getElementById("ul").appendChild(li);
+    // Logger("- 💎");
     console.log("- 💎");
   });
-  console.log("- Diamonds displayed !");
+  Logger("- Diamonds displayed !");
 }
 
 
-// TODO: Author, link, Background Top x, Aside, link remove entries, if finish, differant sort, error origin
+function Logger(text) {
+  console.log(text);
+  var li = document.createElement("li");
+  li.innerHTML = text;
+  document.getElementById("log").appendChild(li);
+}
+
+// TODO: link, Background Top x, Aside, link remove entries, if finish, differant sort, error origin

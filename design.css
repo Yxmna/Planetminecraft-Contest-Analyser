@@ -9,7 +9,7 @@
 }
 
 body {
-  background: #000000;
+  background: #181A1B;
   color: white;
 }
 
@@ -20,34 +20,99 @@ body {
   font-weight: lighter;
 }
 
-body>div {
-  padding-top: 100px;
-  padding-bottom: 100px;
+#header {
+  height: 172px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1070px;
+  position: relative;
+}
+
+header {
+  bottom: 20px;
+  position: absolute;
+  width: 100%;
 }
 
 input {
-  font-size: 16px;
-  padding: 0.25em 0.5em;
+  font-size: 18px;
+  padding: 5px 10px;
   background-color: black;
   color: white;
-  border-radius: 4px;
+  border-radius: 5px;
   border: none;
-  width: 100%;
+  width: 765px;
+}
+
+header h1 {
+  margin-bottom: 10px;
+}
+
+header button {
+  background: darkslateblue;
+  height: 31px;
+  border: none;
+  padding: 0px 10px;
 }
 
 input:focus {
   border: none;
 }
 
-ul, body>div {
-  max-width: 765px;
-  padding: 50px;
+#container {
+  width: 100%;
+  max-width: 1070px;
+  background: #212121;
   margin-left: auto;
   margin-right: auto;
-  background: #212121;
+  display: flex;
+  border-radius: 5px;
 }
 
-ul li {
+ul {
+  padding: 10px;
+  padding-right: 0;
+}
+
+aside {
+  width: 305px;
+  padding: 10px;
+}
+
+main {
+  width: 100%;
+  max-width: 765px;
+}
+
+main>img {
+  width: 100%;
+}
+
+aside ul {
+  border-radius: 5px;
+  background: #303030;
+  font-size: 12px;
+  color: darkgray;
+  overflow-y: auto;
+}
+
+aside ul li {
+  display: flex;
+  margin: 5px;
+  margin-bottom: 7px;
+  font-family: Courier;
+}
+
+aside h1 {
+  font-size: 18px;
+}
+
+#hight, #small {
+  margin-bottom: 20px;
+}
+
+#ul li {
   /* height: 146px; */
   display: flex;
   margin: 5px 0 10px;
@@ -56,6 +121,7 @@ ul li {
   padding: 0;
   background: #303030;
   min-height: 156px;
+  position: relative;
 }
 
 ul li>img {
@@ -70,6 +136,9 @@ ul li h1 {
   color: white;
   font-size: 18px;
   font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 ul li h1:not(:first-child) {
@@ -85,10 +154,6 @@ ul li h1:not(:first-child) {
 .top_50 {
   color: tomato;
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, .25));
-}
-
-ul li h1:not(:first-child)::before {
-  content: "#";
 }
 
 ul li h2 {
@@ -116,13 +181,19 @@ ul li h3 {
 }
 
 .content {
+  /* width: 100%;
   margin: 10px 0;
   position: relative;
-  padding-right: 20px;
+  padding-right: 20px; */
   /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 470px; */
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+  padding-right: 20px;
+  overflow: hidden;
 }
 
 .div_one {}
@@ -134,28 +205,6 @@ ul li h3 {
 
 .diamonds {
   font-size: 18px;
-}
-
-.diamonds::after {
-  content: "💎";
-  margin-left: 3px;
-}
-
-.views::after {
-  content: "👀";
-  margin-left: 3px;
-  top: -1px;
-  position: relative;
-}
-
-.favorites::after {
-  content: "💖";
-  margin-left: 3px;
-}
-
-.downloads::after {
-  content: "⏬";
-  margin-left: 3px;
 }
 
 .stats {

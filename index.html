@@ -6,15 +6,40 @@
 
 <body>
 
-  <div>
+  <div id="header">
 
-    <h1>Contest full name or link:</h1>
-    <input type="text" id="contest_name">
+    <header>
+
+      <h1>Planetminecraft Contest Analyzer</h1>
+      <input type="text" id="contest_name" placeholder="Contest link">
+    </header>
+
 
   </div>
 
-  <ul id="ul">
-  </ul>
+  <div id="container">
+
+    <main>
+      <img src="" id="contest_img">
+      <ul id="ul">
+      </ul>
+    </main>
+
+
+    <aside>
+
+      <h1>High chance of being a finalist: </h1>
+      <h1 id="hight"></h1>
+      <h1>Small chance of being a finalist: </h1>
+      <h1 id="small"></h1>
+
+
+      <ul id="log">
+      </ul>
+
+    </aside>
+
+  </div>
 
 
   <script type="text/javascript" src="code.js"> </script>
