@@ -1,10 +1,13 @@
-var input = document.getElementById("contest_name");
-input.addEventListener("keydown", function(e) {
-  if (e.code === "Enter") {
+document.getElementById("contest_name").addEventListener("keydown", function(e) {
+  if (e.code == "Enter" || e.code == "NumpadEnter") {
     EnterToTheMine();
   }
 });
-
+document.getElementById("planetmc_name").addEventListener("keydown", function(e) {
+  if (e.code === "Enter") {
+    Search();
+  }
+});
 
 var pages = [];
 var chest = {};
@@ -40,6 +43,13 @@ function EnterToTheMine() {
       Logger("- Underground gallery found: " + page_count);
       SearchDiamond(page_count);
     })
+    .catch(function() {
+      Logger("✕ Error, Allow-Origin is not bypassed");
+      Logger("Download CORS Everywhere:");
+      Logger("https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/");
+      Logger("And activate it in a planetminecraft page");
+    })
+
 }
 
 
@@ -151,6 +161,7 @@ function DisplayDiamond() {
     var author = document.createElement("h3");
     var author_img = document.createElement("img");
     var author_div = document.createElement("div");
+    li.id = item.author;
     img.src = item.img_url;
     h1.innerHTML = item.title;
     diamonds.innerHTML = item.diamonds + " 💎";
@@ -199,8 +210,20 @@ function DisplayDiamond() {
 function Logger(text) {
   console.log(text);
   var li = document.createElement("li");
-  li.innerHTML = text;
+  if (text.startsWith("https")) {
+    var link = document.createElement("a");
+    link.href = text;
+    link.innerHTML = text;
+    li.appendChild(link);
+  } else {
+    li.innerHTML = text;
+  }
   document.getElementById("log").appendChild(li);
 }
 
-// TODO: link, Background Top x, Aside, link remove entries, if finish, differant sort, error origin
+function Search() {
+  window.location = window.location.pathname + "#" + document.getElementById("planetmc_name").value;
+}
+
+
+// TODO: link, Background Top x, Aside, link remove entries, if finish, error origin
